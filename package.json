@@ -2,7 +2,6 @@
   "name": "dw2",
   "version": "0.1.0",
   "private": true,
-  "proxy": "--host 0.0.0.0",
   "dependencies": {
     "@carbon/colors": "^11.8.0",
     "@carbon/icons-react": "^11.11.0",
