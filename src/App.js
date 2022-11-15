@@ -1,25 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+// eslint-disable-next-line no-unused-vars
+import React, { useState, useEffect } from 'react';
+// eslint-disable-next-line no-unused-vars
+import Pages from './pages';
+// eslint-disable-next-line no-unused-vars
+import Loading from './components/Loading';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const [user, setUser] = useState(null);
+
+  const printInConsole = () => {
+    const msg = 'Trabalho de DW2 - BP3097765 - Guilherme Lourenço Pereira';
+    const styles = [
+      'font-size: 16px',
+      'font-family: monospace',
+      'background: white',
+      'display: inline-block',
+      'color: black',
+      'padding: 16px 25px',
+      'border: 1px dashed;',
+    ].join(';');
+    // eslint-disable-next-line no-console
+    console.log(msg, styles);
+  };
+
+  useEffect(() => {
+    printInConsole();
+    fetch('https://gitconnected.com/v1/portfolio/guilhxrmz')
+      .then((res) => res.json())
+      .then((userData) => {
+        setTimeout(() => {
+          setUser(userData);
+        }, 1000);
+      });
+  }, []);
+
+  if (!user) {
+    return <Loading />;
+  }
+
+  return <Pages user={user} />;
 }
 
 export default App;
